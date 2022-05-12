@@ -59,32 +59,33 @@ $f3->route('GET|POST /order', function($f3) {
 
         //Get the data from the post array
         $food = $_POST['food'];
+        $f3->set('userFood', $food);
+
         $meal = "";
         if(isset($_POST['meal'])){
             $meal = $_POST['meal'];
         }
+
+        //add the users meal to the hive
+        $f3->set('userMeal', $meal);
 
         //If data is valid
         if (validFood($food)) {
 
             //Store it in the session array
             $_SESSION['food'] = $food;
-
-            //Redirect to order2 route
-            header('location: order2');
         }
         //Data is not valid -> store an error message
         else {
             $f3->set('errors["food"]', 'Please enter a food at least 2 characters');
         }
         if(validMeal($meal)){
-            $_SESSION['meal'] = meal;
+            $_SESSION['meal'] = $meal;
         }
         //data is notvalid
         else {
-            $f3->set('errors["meal")', 'Meal selection is invalid');
+            $f3->set('errors["meal"]', 'Meal selection is invalid');
         }
-        $_SESSION['meal'] = $_POST['meal'];
 
         //redirect to order2 route if there are no errors
         if (empty($f3->get('errors'))){
