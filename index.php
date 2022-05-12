@@ -57,8 +57,12 @@ $f3->route('GET|POST /order', function($f3) {
         //Move orderForm1 data from POST to SESSION
         var_dump ($_POST);
 
-        //Get the food from the post array
+        //Get the data from the post array
         $food = $_POST['food'];
+        $meal = "";
+        if(isset($_POST['meal'])){
+            $meal = $_POST['meal'];
+        }
 
         //If data is valid
         if (validFood($food)) {
@@ -73,8 +77,19 @@ $f3->route('GET|POST /order', function($f3) {
         else {
             $f3->set('errors["food"]', 'Please enter a food at least 2 characters');
         }
-
+        if(validMeal($meal)){
+            $_SESSION['meal'] = meal;
+        }
+        //data is notvalid
+        else {
+            $f3->set('errors["meal")', 'Meal selection is invalid');
+        }
         $_SESSION['meal'] = $_POST['meal'];
+
+        //redirect to order2 route if there are no errors
+        if (empty($f3->get('errors'))){
+            header('location: order2');
+        }
     }
 
 
