@@ -1,2 +1,2 @@
 # diner
-a diner website
+My Diner Project
