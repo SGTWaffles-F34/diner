@@ -1,12 +1,15 @@
 {
-  "name": "tostrander/328/diner",
+  "name": "gsherman/328/diner",
   "authors": [
     {
-      "name": "Tina Ostrander",
-      "email": "tostrander@greenriver.edu"
+      "name": "Gavin Sherman",
+      "email": "gavinmsherman@gmail.com"
     }
   ],
   "require": {
     "bcosca/fatfree-core": "dev-master"
+  },
+  "autoload": {
+    "classmap": ["classes/", "model/", "controllers/"]
   }
 }
